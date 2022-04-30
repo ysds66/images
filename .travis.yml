@@ -1,0 +1,17 @@
+services:
+  - docker
+
+language: go
+
+
+git:
+  depth: false
+
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push globaltwo/kubetool:alpine-3.15:latest
+  on:
+    branch: master
+
