@@ -2,6 +2,7 @@ FROM alpine:3.15
 
 ARG KUBECTL_VERSION=v1.20.6
 ARG TARGETPLATFORM=linux/amd64
+ENV TERM xterm
 
 WORKDIR /root
 
@@ -24,9 +25,10 @@ RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main\nhttp://dl-cdn.alpin
    yaml-cpp=0.6.2-r2 \
    tcpdump \
    util-linux \
+   tzdata \
    ca-certificates && \
    update-ca-certificates && \
-   tzdata && \cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\echo "Asia/Shanghai" > /etc/timezone && \
+   \cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\echo "Asia/Shanghai" > /etc/timezone && \
    apk del tzdata && \
    rm -rf /var/cache/apk/* && \
    curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/${TARGETPLATFORM}/kubectl && \
@@ -37,4 +39,3 @@ RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main\nhttp://dl-cdn.alpin
 
 
 CMD ["/bin/bash"]
-
