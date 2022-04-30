@@ -6,7 +6,6 @@ on:
       - 'master'
     tags:
       - '*'
-
 jobs:
 
   push_to_registry:
